@@ -271,12 +271,26 @@ spec:
 kubectl create -f jira-deployment.yaml
 ```
 
-지금까지 배포한 pod 정보를 확인하고, 접속합니다. 
+쿠버네티스 대시보드에서 jira가 배포된 노드의 외부 주소를 확인하고, 서비스 정보를 불러옵니다.
 ```bash
-kubectl get nodes -n jira-cicd -o wide
 kubectl get svc -n jira-cicd 
 ```
+결과창은 대략 다음과 같아야 합니다.
+```bash
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+jira         NodePort    172.21.131.209   <none>        9090:32190/TCP   11m
+jira-mysql   ClusterIP   None             <none>        3306/TCP         8h
+```
+앞서 확인한 ExportIP에 포트번호를 붙여 `http:ExportIPAdress:32190`으로 접속해 jira 초기 설정을 시작합니다. 
 
+## 삭제하기 
+지금까지 만든 인스턴스를 모두 삭제합니다.
+```bash
+kubectl delete -f jira-mysql-pvc.yaml
+kubectl delete -f jira-mysql-pv.yaml
+kubectl delete -f jira-pvc.yaml 
+kubectl delete -f jira-pv.yaml 
+```
 
 ## Reference
 - kubernetes, (2020, June 08), https://kubernetes.cn/ko/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
