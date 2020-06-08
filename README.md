@@ -210,6 +210,72 @@ exit
 다음으로 Jira 인스턴스를 배포합니다. 
 
 #### jira-deployment.yaml
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: jira
+  namespace: jira-cicd
+  labels:
+    name: jira
+spec:
+  ports:
+    - port: 9090
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    name: jira
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jira
+  namespace: jira-cicd
+  labels:
+    name: jira
+spec:
+  selector:
+    matchLabels:
+      name: jira
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: jira
+    spec:
+      containers:
+      - image: atlassian/jira-software:latest
+        name: jira
+        env:
+        - name: ALT_JDBC_URL
+          value: jdbc:mysql://jira-mysql:3306/jiradb
+        - name: ALT_JDBC_DRIVER
+          value: com.mysql.jdbc.Driver
+        - name: ALT_JDBC_USER
+          value: root
+        - name: ALT_DB_TYPE
+          value: mysql
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /var/atlassian/application-data/jira
+          name: jira-pv
+      volumes:
+      - name: jira-pv
+        persistentVolumeClaim:
+          claimName: jira-pvc
+```
+다음 명령어로 쿠버네티스 클러스터에 배포합니다. 
+```bash
+kubectl create -f jira-deployment.yaml
+```
+
+지금까지 배포한 pod 정보를 확인하고, 접속합니다. 
+```bash
+kubectl get nodes -n jira-cicd -o wide
+kubectl get svc -n jira-cicd 
+```
 
 
 ## Reference

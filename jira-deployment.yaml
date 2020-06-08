@@ -6,10 +6,10 @@ metadata:
   labels:
     name: jira
 spec:
+  type: NodePort
   ports:
     - port: 9090
       targetPort: 8080
-      protocol: TCP
   selector:
     name: jira
 ---
