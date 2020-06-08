@@ -1,0 +1,6 @@
+namespace: jira-cicd
+secretGenerator:
+- name: jira-mysql-pass
+  literals:
+  - password=passw0rd
+      
