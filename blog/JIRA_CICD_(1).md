@@ -285,7 +285,7 @@ jira-mysql   ClusterIP   None             <none>        3306/TCP         8h
 ```
 앞서 확인한 ExportIP에 포트번호를 붙여 `http://ExportIPAdress:32190`으로 접속해 jira 초기 설정을 시작합니다. 
 
-![img](image/jira_1.png)
+![img](../image/jira_1.png)
 
 ## 삭제하기 
 지금까지 만든 인스턴스를 모두 삭제합니다.
