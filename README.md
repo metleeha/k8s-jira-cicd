@@ -2,7 +2,7 @@
 > Jira를 쿠버네티스 클러스터에 올리고, Gitlab, Jenkins를 연동해서 DevOps toolchain을 구성합니다. 
 
 ## Series
-1. [쿠버네티스에 Jira 설치하기](../blog/#jira_cicd_(1))
+1. [쿠버네티스에 Jira 설치하기](k8s_jira/blob/master/blog/jira_cicd_(1).md)
 2. Jira 초기 설정하기
 3. Jira, Gitlab, Jenkins 연동하기 
 
