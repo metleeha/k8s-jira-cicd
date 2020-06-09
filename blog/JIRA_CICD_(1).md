@@ -290,10 +290,7 @@ jira-mysql   ClusterIP   None             <none>        3306/TCP         8h
 ## 삭제하기 
 지금까지 만든 인스턴스를 모두 삭제합니다.
 ```bash
-kubectl delete -f jira-mysql-pvc.yaml
-kubectl delete -f jira-mysql-pv.yaml
-kubectl delete -f jira-pvc.yaml 
-kubectl delete -f jira-pv.yaml 
+kubectl delete namespace jira-cicd
 ```
 
 ## Reference
