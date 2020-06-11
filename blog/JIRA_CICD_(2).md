@@ -1,7 +1,7 @@
-# 쿠버네티스에서 Jira 활용한 CI/CD 파이프라인 구축하기(2/3)
-> Jira와 MySQL을 쿠버네티스에 올리고, Gitlab 및 Jenkins를 연동해 CI/CD 파이프라인을 구성합니다. 
+# Kubernetes(IKS)에서 Jira 활용한 CI/CD 파이프라인 구축하기(2/4)
 
 ## Part 2. Jira 초기 설정하기
+> Jira 인스턴스 설치를 마치고, 초기 설정을 진행합니다.
 
 먼저 설정 첫 화면에서 `I'll set it up myself`를 선택해 진행하겠습니다. 
 
@@ -18,6 +18,10 @@ apt-get update
 apt-get install -y vim
 ```
 `dbconfig.xml` 파일에 db 설정값을 집어넣습니다.
+```bash
+vi dbconfig.xml
+```
+
 ```xml
 <url>jdbc:mysql://169.56.75.38:3306/jiradb?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=default_storage_engine=InnoDB</url>
 <username>root</username>

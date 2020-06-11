@@ -1,7 +1,7 @@
-# 쿠버네티스에서 Jira 활용한 CI/CD 파이프라인 구축하기(1/3)
-> Jira와 MySQL을 쿠버네티스에 올리고, Gitlab 및 Jenkins를 연동해 CI/CD 파이프라인을 구성합니다. 
+# Kubernetes(IKS)에서 Jira 활용한 CI/CD 파이프라인 구축하기(1/4)
 
 ## Part 1. 쿠버네티스 클러스터에 Jira 설치하기 
+> Jira와 MySQL을 쿠버네티스에 올리고, Gitlab 및 Jenkins를 연동해 CI/CD 파이프라인을 구성합니다. 
 
 ## 사전 준비 사항
 - IBM CLI (IKS)
