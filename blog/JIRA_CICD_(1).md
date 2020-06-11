@@ -3,7 +3,7 @@
 
 ## Part 1. 쿠버네티스 클러스터에 Jira 설치하기 
 
-### 설치 환경
+## 사전 준비 사항
 - IBM CLI (IKS)
 
 쿠버네티스 클러스터 config를 설정해준 상태에서 진행합니다. IBM CLI에서 클러스터 설정에 대한 자세한 내용을 다음 [링크](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)를 참조해주세요.
