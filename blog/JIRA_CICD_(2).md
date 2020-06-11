@@ -42,3 +42,6 @@ jira 초기 설정 url에 접속해 자동으로 db 설정을 진행합니다. �
 사용할 언어와 아바타를 선택하고 jira 설치 과정을 마무리합니다!
 
 ![img](../image/jira_6.png)
+
+## Reference
+- Atlassian, (June 10, 2020), https://confluence.atlassian.com/jirasoftwareserver/installing-jira-software-938845212.html
