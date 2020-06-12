@@ -5,7 +5,7 @@
 
 ## 사전 준비 사항
 - [Gitlab(VM) 설치](https://velog.io/@hamon/Ubuntu18.04에-Gitlab-설치하기)
-- [Jenkins(VM) 설치](https://velog.io/@hamon/Ubuntu18.04에-Jenkins-설치하기)
+- Jenkins(IKS) 설치
 
 ## 연동 환경
 - Jenkins ver. 2.222.4 

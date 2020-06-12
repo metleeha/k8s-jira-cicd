@@ -5,8 +5,7 @@
 
 ## 사전 준비 사항
 - [Gitlab(VM) 설치](https://velog.io/@hamon/Ubuntu18.04에-Gitlab-설치하기)
-- [Jenkins(VM) 설치](https://velog.io/@hamon/Ubuntu18.04에-Jenkins-설치하기)
-- JIRA(IKS) 설치
+- Jenkins 설치(IKS)
 - [Jira 프로젝트 생성 및 이슈 등록](https://velog.io/@hamon/2-Jira-프로젝트-커스터마이징-하기)
 
 ## Features
@@ -70,7 +69,55 @@ Jenkins 파일을 업데이트하면 앞서 Gitlab Push와 Jenkins pipeline buil
 
 ### 3. Jira Workflow에서 Jenkins 자동빌드 실행하기
 
+Jira에서 Jenkins에 자동빌드를 실행하기 위해서는 Jira Trigger 플러그인을 사용하면 간단하게 설정할 수 있습니다. (사용 방법은 [네이버 블로그](https://m.blog.naver.com/pooh4880/220970205734)를 참고하세요.)
+다만 Jira Trigger 플러그인의 경우 Jenkins가 사용할 수 있는 포트 번호가 고정되어 있을 뿐만 아니라 SSH 인증 등 여러가지 상황에 따라 사용할 수 없는 경우가 많습니다. 
+따라서 Jenkins에 직접 Build trigger를 할 수 있는 URL을 생성하고, Shell 커맨드로 Curl을 사용해 Jenkins 빌드를 실행시키는 방법을 소개하려 합니다. 
+
+Jenkins의 `Pipeline > Settings > Build Trigger`에서 `Trigger Build Remotely`를 선택합니다. 
+임의로 사용할 Token을 입력하는데, 평범한 password를 사용하기 보다는 [Randomkeygen 사이트](https://randomkeygen.com/) 등을 이용해 보안이 강화된 Token을 사용하는 것을 권장합니다. 
+
+Jenkins에서 User를 새로 생성하고, 해당 유저의 API Token을 생성합니다. Jenkins Manage > Configure Global Security > API Token에서 `Generate a legacy API token for each newly created user`를 체크합니다. 이제 사용자 설정 탭에 들어가면 api token 을 새성할 수 있습니다. 
+
+앞서 직접 만든 `CUSTOM_TOKEN`과 Jenkins에서 User 로그인을 위해 만든 `API TOKEN`을 조합해서 다음과 같은 url을 만들어볼 수 있습니다. 
+
+`http://{USER_ID}:{API_TOKEN}@{JENKINS_URL}/job/jira-cicd-demo/build?token={CUSTOM_TOKEN}`
+
+그런 다음 커멘트 창에서 POST 요청을 보내 빌드가 실행되는지 확인해봅니다. 
+```bash
+curl -X POST http://{USER_ID}:{API_TOKEN}@{JENKINS_URL}/job/jira-cicd-demo/build?token={CUSTOM_TOKEN}
+``` 
+커멘드 창에서는 실행이 되지만 Jira에서 웹훅 등록은 반드시 보안이 강화된 HTTPS 요청만 가능하기 때문에 바로 등록해서 사용하기 어렵습니다. 
+
+따라서 직접 curl 요청을 보내는 방식으로 연동해보겠습니다.
+Jira 용 Atlassian 마켓플레이스에서는 다양한 앱을 제공하고 있고, 그 중에서 Script를 직접 작성해서 workflow postfunction에 활용할 수 있는 `ScriptRunner for Jira`를 다운받아 사용했습니다. 
+![](../image/scriptrunner.png)
+
+플러그인 설치 후에는 반드시 재색인을 수행해주어야 Jira에서 추가된 기능을 사용하실 수 있습니다. 
+![](../image/reindex.png)
+
+이제 script 작성을 workflow 에 적용하기 위해 먼저 빌드 트리거용 status를 하나 만들어보겠습니다. 
+![](../image/custom_workflow.png)
+이런 식으로 원하는 status를 만들고, 해당 status로 전환하면서 post function을 발생시키는데, 이 때 script가 실행되도록 action을 설정할 수 있습니다 
+
+![](../image/click_post_function.png)
+후속 조치(post function)를 클릭하고 들어가 후속 조치를 추가합니다.
+
+![](../image/add_script_runner.png)
+script으로 post function을 추가할 수 있는 탭이 새로 생긴 것을 확인하실 수 있습니다.
+클릭해서 들어가고, `Custom script post-function`을 사용해 스크립트를 작성합니다. 
+
+```groovy
+def proc = 'curl -v -k -X POST http://{USER_ID}:{API_TOKEN}@{JENKINS_URL}/job/jira-cicd-demo/build?token={CUSTOM_TOKEN}'.execute()
+
+Thread.start { System.err << proc.err }
+proc.waitFor()
+```
+JIRA 이슈에서 Build Trigger 전환 버튼을 누르고, Jenkins 자동빌드되는 것을 확인합니다.
+
+ScriptRunner의 경우 유료로 구매해서 사용해야합니다. 스크립트를 비교적 자유롭게 작성할 수 있는 장점이 있지만, 빠른 시간 내에 SSL인증 없이 연동을 완성해야하는 등의 특수한 경우가 아니라면 가급적 JIRA에서 제공하는 웹훅 기능을 활용하시길 권장합니다. 앞서 curl 명령어로 요청을 날린 빌드 트리거 URL의 경우, JIRA 웹훅으로 등록해서도 Workflow Post Function으로 사용할 수 있습니다. 
+
 
 ## Reference
 - Jenkins, (June 12, 2020), https://www.jenkins.io/doc/pipeline/steps/jira-steps/
-
+- HumanWhoCode, (June 12, 2020), https://humanwhocodes.com/blog/2015/10/triggering-jenkins-builds-by-url/
+- StackOverFlow, (June 12, 2020), https://stackoverflow.com/questions/23742419/perfectly-working-curl-command-fails-when-executed-in-a-groovy-script

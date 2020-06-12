@@ -17,14 +17,14 @@ Jira Software는 애자일 방법론을 적용한 프로젝트를 원활하게 �
 
 ## Flow
 
-![](./image/jira_cicd_flow_v2.png)
+![](./image/jira_cicd_flow.png)
 
 ### Features
 1. Gitlab에 소스코드 수정 Commit/Merge 하기 
-2. Gitlab Webhook으로 Jenkins 자동 배포하기
+2. Gitlab Webhook으로 Jenkins 자동빌드 설정하기
 3. JIRA Issue에 Gitlab Commit/Merge 정보 업데이트하기
 4. JIRA Issue에 Jenkins 빌드 결과 업데이트하기
-5. JIRA Workflow Post Fuction 이용해 자동 배포하기 
+5. JIRA Webhook으로 Jenkins 자동빌드 설정하기
 
 ## Included Components
 - Kubernetes Clusters
