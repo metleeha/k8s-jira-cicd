@@ -15,7 +15,7 @@
 
 ## Steps
 1. Jira와 Gitlab 연동하기 
-2. JJira에서 Jenkins 빌드 확인하기  
+2. Jira에서 Jenkins 빌드 확인하기  
 3. Jira Workflow에서 Jenkins 자동빌드 설정
 
 ### 1. Jira와 Gitlab 연동하기
