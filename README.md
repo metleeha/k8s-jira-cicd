@@ -42,7 +42,7 @@ Jira Software는 애자일 방법론을 적용한 프로젝트를 원활하게 �
 1. [쿠버네티스에 Jira 설치하기](blog/JIRA_CICD_(1).md)
 2. [Jira 초기 설정하기](blog/JIRA_CICD_(2).md)
 3. [Gitlab, Jenkins Webhook 연동하기](blog/JIRA_CICD_(3).md)
-4. [Jira에서 Gitlab, Jenkins CI/CD 운영하기](blog/JIRA_CICD(4).md)
+4. [Jira에서 Gitlab, Jenkins CI/CD 운영하기](blog/JIRA_CICD_(4).md)
 
 ## License
 

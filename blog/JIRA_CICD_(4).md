@@ -5,7 +5,7 @@
 
 ## 사전 준비 사항
 - [Gitlab(VM) 설치](https://velog.io/@hamon/Ubuntu18.04에-Gitlab-설치하기)
-- Jenkins 설치(IKS)
+- Jenkins(IKS) 설치
 - [Jira 프로젝트 생성 및 이슈 등록](https://velog.io/@hamon/2-Jira-프로젝트-커스터마이징-하기)
 
 ## Features
@@ -116,6 +116,7 @@ JIRA 이슈에서 Build Trigger 전환 버튼을 누르고, Jenkins 자동빌드
 
 ScriptRunner의 경우 유료로 구매해서 사용해야합니다. 스크립트를 비교적 자유롭게 작성할 수 있는 장점이 있지만, 빠른 시간 내에 SSL인증 없이 연동을 완성해야하는 등의 특수한 경우가 아니라면 가급적 JIRA에서 제공하는 웹훅 기능을 활용하시길 권장합니다. 앞서 curl 명령어로 요청을 날린 빌드 트리거 URL의 경우, JIRA 웹훅으로 등록해서도 Workflow Post Function으로 사용할 수 있습니다. 
 
+지금까지 대표적인 ITSM 프로그램인 JIRA를 쿠버네티스 클러스터에 올려서 Gitlab, Jenkins와 함께 CI/CD 파이프라인을 구축하는 방법을 알아봤습니다.
 
 ## Reference
 - Jenkins, (June 12, 2020), https://www.jenkins.io/doc/pipeline/steps/jira-steps/

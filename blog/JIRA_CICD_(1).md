@@ -26,7 +26,7 @@ kubectl create namespace jira-cicd
 
 ## 1. 퍼시스턴트클레임볼륨 및 퍼시스트볼륨 생성
 
-쿠버네티스의 pod에 이상이 생겨 재시작이 될 경우 데이터가 모두 날라갈 수 있습니다. 이런 상황을 방지하기 위해서 데이터베이스를 올릴 경우 퍼시스트볼륨을 설정해주어야 합니다. 퍼시스턴트볼륨 개념에 대한 자세한 내용은 [쿠버네티스 공식문서](https://kubernetes.io/ko/docs/concepts/storage/persistent-volumes/)를 참고하세요.
+쿠버네티스의 pod에 이상이 생겨 재시작이 될 경우 데이터가 모두 손실될 수 있습니다. 이런 상황을 방지하기 위해서 데이터베이스를 올릴 경우 퍼시스트볼륨을 설정해주어야 합니다. 퍼시스턴트볼륨 개념에 대한 자세한 내용은 [쿠버네티스 공식문서](https://kubernetes.io/ko/docs/concepts/storage/persistent-volumes/)를 참고하세요.
 
 먼저 PersistentVolume을 생성합니다. volume 이름은 `jira-mysql-pv`로 지정하고, hostPath타입으로 worker node의 `/mnt/data/` 경로에 mysql 파일이 저장되도록 설정합니다. 이어서 `---` 을 두고 한 파일에 PersistentVolumeClaim을 설정합니다.  
 

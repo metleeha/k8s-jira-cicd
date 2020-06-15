@@ -47,11 +47,10 @@ Jenkins에서 `새로운 아이템 > 파이프라인` 선택해 생성하고, Co
 Gitlab에서 Settings > Webhooks 에서 webhook을 등록할 수 있습니다. 크게 id/password 방식과 secret token 방식이 있는데, 여기서는 secret token 방식을 사용하겠습니다. 
 앞에서 확인한 webhook url을 입력하고, jenkins로 돌아가서 `Configure> Build Trigger` 탭에서 고급 버튼을 클릭하면 secret token을 만들 수 있습니다. 
 
-설정을 완료하려하면 다음과 같은 에러를 마주할 수 있는데,
-두가지 해결 방법을 시도해볼 수 있습니다.
+설정을 완료하려하면 다음과 같은 에러를 마주할 수 있는데, 다음과 같은 해결 방법을 시도해볼 수 있습니다.
 ![](../image/webhook_error.png)
 
-먼저, Gitlab에서 `Admin area > Settings > Network > Outbound Request` 에서 체크박스를 모두 클릭하고, Jenkins url을 등록해줍니다. 
+Gitlab의 `Admin area > Settings > Network > Outbound Request` 에서 체크박스를 모두 클릭하고, Jenkins url을 등록해줍니다. 
 
 등록한 webhook에서 test 버튼을 클릭하고 push event를 발생시켜봅니다. 
 연결에 성공하면 다음과 같은 메세지가 뜹니다. 
