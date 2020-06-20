@@ -1,13 +1,9 @@
 # 쿠버네티스에서 Jira 활용한 CI/CD 파이프라인 구축하기
 > Jira를 쿠버네티스 클러스터에 올리고, Gitlab, Jenkins를 연동해서 DevOps toolchain을 구성합니다. 
 
-- 참고 샘플 : https://developer.ibm.com/kr/journey/run-gitlab-kubernetes/
+[원문](https://developer.ibm.com/kr/cloud/devops/2020/06/19/jira-cicd-1/)
 
 최근 IT 서비스 관리(ITSM, Information Technology Service Management)와 개발 및 운영 서비스를 통합 관리하는 DevOps 툴체인이 주요 트렌드로 자리잡고 있습니다. 최근 기업들은 Openshift, Kuberenetes와 같은 컨테이너 오케스트레이션 플랫폼으로 애플리케이션의 배포, 확장, 유지보수를 모두 할 수 있도록 환경 구축을 하고 서비스 관리를 위해 JIRA를 적극적으로 활용하고 있습니다. 
-
-‘코드 보기’ 버튼을 클릭하면 GitHub에서 한글 README 파일을 선택하여 보실 수 있습니다.
-
-By Hadong Lee
 
 ## Overview
 
@@ -43,6 +39,4 @@ Jira Software는 애자일 방법론을 적용한 프로젝트를 원활하게 �
 2. [Jira 초기 설정하기](blog/JIRA_CICD_(2).md)
 3. [Gitlab, Jenkins Webhook 연동하기](blog/JIRA_CICD_(3).md)
 4. [Jira에서 Gitlab, Jenkins CI/CD 운영하기](blog/JIRA_CICD_(4).md)
-
-## License
 
